@@ -1,7 +1,8 @@
+/* @flow */
 const express = require('express');
 const router = express.Router();
-const { homePage } = require('../controllers/storeController');
+const { homePage, myMiddleware } = require('../controllers/storeController');
 
-router.get('/', homePage);
+router.get('/', myMiddleware, homePage);
 
 module.exports = router;
