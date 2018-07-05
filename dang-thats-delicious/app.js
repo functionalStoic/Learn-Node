@@ -1,4 +1,3 @@
-/* @flow */
 const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
@@ -7,10 +6,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const promisify = require('es6-promisify');
+const { promisify } = require('es6-promisify');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
-const routes = require('./routes');
+const routes = require('./routes/index');
 const helpers = require('./helpers');
 const {
   notFound,
@@ -59,7 +58,6 @@ app.use(passport.session());
 app.use(flash());
 
 // pass variables to our templates + all requests
-// $FlowFixMe
 app.use((req, res, next) => {
   res.locals.h = helpers;
   res.locals.flashes = req.flash();
@@ -69,7 +67,6 @@ app.use((req, res, next) => {
 });
 
 // promisify some callback based APIs
-// $FlowFixMe
 app.use((req, res, next) => {
   req.login = promisify(req.login, req);
   next();
