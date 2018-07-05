@@ -3,7 +3,6 @@
 */
 
 const path = require('path');
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 /*
@@ -15,10 +14,12 @@ const autoprefixer = require('autoprefixer');
 // This is our JavaScript rule that specifies what to do with .js files
 const javascript = {
   test: /\.(js)$/, // see how we match anything that ends in `.js`? Cool
-  use: [{
-    loader: 'babel-loader',
-    options: { presets: ['env'] } // this is one way of passing options
-  }],
+  use: [
+    {
+      loader: 'babel-loader',
+      options: { presets: ['env'] } // this is one way of passing options
+    }
+  ]
 };
 
 /*
@@ -28,7 +29,9 @@ const javascript = {
 const postcss = {
   loader: 'postcss-loader',
   options: {
-    plugins() { return [autoprefixer({ browsers: 'last 3 versions' })]; }
+    plugins() {
+      return [autoprefixer({ browsers: 'last 3 versions' })];
+    }
   }
 };
 
@@ -38,16 +41,16 @@ const styles = {
   // here we pass the options as query params b/c it's short.
   // remember above we used an object for each loader instead of just a string?
   // We don't just pass an array of loaders, we run them through the extract plugin so they can be outputted to their own .css file
-  use: ExtractTextPlugin.extract(['css-loader?sourceMap', postcss, 'sass-loader?sourceMap'])
+  use: ExtractTextPlugin.extract([
+    'css-loader?sourceMap',
+    postcss,
+    'sass-loader?sourceMap'
+  ])
 };
-
-// We can also use plugins - this one will compress the crap out of our JS
-const uglify = new webpack.optimize.UglifyJsPlugin({ // eslint-disable-line
-  compress: { warnings: false }
-});
 
 // OK - now it's time to put it all together
 const config = {
+  mode: 'development',
   entry: {
     // we only have 1 entry, but I've set it up for multiple in the future
     App: './public/javascripts/delicious-app.js'
@@ -69,13 +72,10 @@ const config = {
     rules: [javascript, styles]
   },
   // finally we pass it an array of our plugins - uncomment if you want to uglify
-  // plugins: [uglify]
   plugins: [
     // here is where we tell it to output our css to a separate file
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('style.css')
   ]
 };
-// webpack is cranky about some packages using a soon to be deprecated API. shhhhhhh
-process.noDeprecation = true;
 
 module.exports = config;

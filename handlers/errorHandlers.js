@@ -16,25 +16,11 @@ exports.catchErrors = fn => {
   If we hit a route that is not found, we mark it as 404 and pass it along to the next error handler to display
 */
 exports.notFound = (req, res) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  err.stack = err.stack || '';
-
   res.status(404);
-
   res.format({
-    html: function() {
-      res.render('error', {
-        message: err.message,
-        status: err.status
-      });
-    },
-    json: function() {
-      res.json({ error: 'Not found' });
-    },
-    default: function() {
-      res.type('txt').send('Not found');
-    }
+    html: () => res.render('error', { message: 'Not Found', status: 404 }),
+    json: () => res.json({ error: { message: 'Not Found', status: 404 } }),
+    default: () => res.type('txt').send('Not Found')
   });
 };
 
@@ -44,6 +30,7 @@ exports.notFound = (req, res) => {
 */
 
 exports.flashValidationErrors = (err, req, res, next) => {
+  // if there are no errors to show for flashes, skip it
   if (!err.errors) return next(err);
 
   // validation errors look like
@@ -59,6 +46,7 @@ exports.flashValidationErrors = (err, req, res, next) => {
 */
 exports.developmentErrors = (err, req, res /* , next */) => {
   err.stack = err.stack || '';
+
   const errorDetails = {
     message: err.message,
     status: err.status,
@@ -67,13 +55,15 @@ exports.developmentErrors = (err, req, res /* , next */) => {
       '<mark>$&</mark>'
     )
   };
+
   res.status(err.status || 500);
+
+  // Return res based on the `Accept` http header
   res.format({
-    // Based on the `Accept` http header
-    html: () => {
-      res.render('error', errorDetails);
-    }, // Form Submit, Reload the page
-    'application/json': () => res.json(errorDetails) // Ajax call, send JSON back
+    // Form Submit, Reload the page
+    html: () => res.render('error', errorDetails),
+    // Ajax call, send JSON back
+    json: () => res.json(errorDetails)
   });
 };
 
@@ -82,7 +72,6 @@ exports.developmentErrors = (err, req, res /* , next */) => {
   No stacktraces are leaked to user
 */
 exports.productionErrors = (err, req, res /* , next */) => {
-  console.log('Got to productionErrors');
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
