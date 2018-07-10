@@ -1,23 +1,24 @@
-const express = require('express');
-const session = require('express-session');
-const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const passport = require('passport');
-const { promisify } = require('es6-promisify');
-const flash = require('connect-flash');
-const expressValidator = require('express-validator');
-const routes = require('./routes/routes');
-const helpers = require('./helpers');
-const {
+import express from 'express';
+import session from 'express-session';
+import mongoose from 'mongoose';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import flash from 'connect-flash';
+import expressValidator from 'express-validator';
+import routes from './routes/routes';
+import helpers from './helpers';
+import { promisify } from 'es6-promisify';
+import ConnectMongo from 'connect-mongo';
+
+import {
   notFound,
   flashValidationErrors,
   developmentErrors,
   productionErrors
-} = require('./handlers/errorHandlers');
-require('./handlers/passport');
+} from './handlers/errorHandlers';
+import './handlers/passport';
 
 // create our Express app
 const app = express();
@@ -41,6 +42,7 @@ app.use(cookieParser());
 
 // Sessions allow us to store data on visitors from request to request
 // This keeps users logged in and allows us to send flash messages
+const MongoStore = ConnectMongo(session);
 app.use(
   session({
     secret: process.env.SECRET,

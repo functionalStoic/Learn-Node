@@ -5,17 +5,14 @@
   catchErrors(), catch any errors they throw, and pass it along to our express middleware with next()
 */
 
-exports.catchErrors = fn => {
-  return function(req, res, next) {
-    return fn(req, res, next).catch(next);
-  };
-};
+export const catchErrors = fn => (req, res, next) =>
+  fn(req, res, next).catch(next);
 
 /*
   Not Found Error Handler
   If we hit a route that is not found, we mark it as 404 and pass it along to the next error handler to display
 */
-exports.notFound = (req, res) => {
+export const notFound = (req, res) => {
   res.status(404);
   res.format({
     html: () => res.render('error', { message: 'Not Found', status: 404 }),
@@ -29,7 +26,7 @@ exports.notFound = (req, res) => {
   Detect if there are mongodb validation errors that we can nicely show via flash messages
 */
 
-exports.flashValidationErrors = (err, req, res, next) => {
+export const flashValidationErrors = (err, req, res, next) => {
   // if there are no errors to show for flashes, skip it
   if (!err.errors) return next(err);
 
@@ -44,7 +41,7 @@ exports.flashValidationErrors = (err, req, res, next) => {
   Development Error Handler
   In development we show good error messages so if we hit a syntax error or any other previously un-handled error, we can show good info on what happened
 */
-exports.developmentErrors = (err, req, res /* , next */) => {
+export const developmentErrors = (err, req, res /* , next */) => {
   err.stack = err.stack || '';
 
   const errorDetails = {
@@ -71,7 +68,7 @@ exports.developmentErrors = (err, req, res /* , next */) => {
   Production Error Handler
   No stacktraces are leaked to user
 */
-exports.productionErrors = (err, req, res /* , next */) => {
+export const productionErrors = (err, req, res /* , next */) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
