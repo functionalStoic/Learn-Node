@@ -3006,16 +3006,20 @@ var _dompurify = __webpack_require__(/*! dompurify */ "./node_modules/dompurify/
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var createSearchResult = function createSearchResult(_ref) {
+  var slug = _ref.slug,
+      name = _ref.name,
+      description = _ref.description;
+  return '\n  <a href="/stores/' + slug + '" class="search__result">\n    <strong>' + name + '</strong><br />\n    <div>' + description + '</div>\n  </a>\n';
+};
+
 var searchResultsHTML = function searchResultsHTML(stores) {
-  return stores.map(function (_ref) {
-    var slug = _ref.slug,
-        name = _ref.name;
-    return '\n          <a href="/stores/' + slug + '" class="search__result">\n            <strong>' + name + '</strong>\n          </a>\n        ';
-  }).join('');
+  return stores.map(createSearchResult).join('');
 };
 
 function typeAhead(search) {
   if (!search) return;
+
   var searchInput = search.querySelector('input[name="search"]');
   var searchResults = search.querySelector('.search__results');
 
@@ -3023,10 +3027,7 @@ function typeAhead(search) {
     var _this = this;
 
     // if there is no value, quit it!
-    if (!this.value) {
-      searchResults.style.display = 'none';
-      return;
-    }
+    if (!this.value) return searchResults.style.display = 'none';
 
     // show the search results
     searchResults.style.display = 'block';

@@ -1,29 +1,25 @@
 import axios from 'axios';
 import { sanitize } from 'dompurify';
 
-const searchResultsHTML = stores =>
-  stores
-    .map(
-      ({ slug, name }) =>
-        `
-          <a href="/stores/${slug}" class="search__result">
-            <strong>${name}</strong>
-          </a>
-        `
-    )
-    .join('');
+const createSearchResult = ({ slug, name, description }) =>
+  `
+  <a href="/stores/${slug}" class="search__result">
+    <strong>${name}</strong><br />
+    <div>${description}</div>
+  </a>
+`;
+
+const searchResultsHTML = stores => stores.map(createSearchResult).join('');
 
 function typeAhead(search) {
   if (!search) return;
+
   const searchInput = search.querySelector('input[name="search"]');
   const searchResults = search.querySelector('.search__results');
 
   searchInput.on('input', function() {
     // if there is no value, quit it!
-    if (!this.value) {
-      searchResults.style.display = 'none';
-      return;
-    }
+    if (!this.value) return (searchResults.style.display = 'none');
 
     // show the search results
     searchResults.style.display = 'block';
