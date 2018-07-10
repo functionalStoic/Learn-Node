@@ -10,7 +10,9 @@ const {
   editStore,
   getStoreBySlug,
   getStoresByTag,
-  searchStores
+  searchStores,
+  mapStores,
+  mapPage
 } = require('../controllers/storeController');
 const {
   loginForm,
@@ -61,10 +63,13 @@ router.post('/account/forgot', catchErrors(forgot));
 router.get('/account/reset/:token', catchErrors(reset));
 router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
 
+router.get('/map', mapPage);
+
 /*
   API
 */
 
 router.get('/api/search', catchErrors(searchStores));
+router.get('/api/stores/near', catchErrors(mapStores));
 
 module.exports = router;
