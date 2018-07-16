@@ -15,7 +15,8 @@ const {
   mapStores,
   mapPage,
   heartStore,
-  getHearts
+  getHearts,
+  getTopStores
 } = require('../controllers/storeController');
 const {
   loginForm,
@@ -34,11 +35,13 @@ const {
   confirmedPasswords,
   update
 } = require('../controllers/authController');
+const { addReview } = require('../controllers/reviewController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
+router.get('/stores/page/:page', catchErrors(getStores));
 
 router.get('/add', isLoggedIn, addStore);
 router.post('/add', upload, catchErrors(resize), catchErrors(createStore));
@@ -69,6 +72,9 @@ router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
 router.get('/map', mapPage);
 
 router.get('/hearts', catchErrors(getHearts));
+router.post('/reviews/:id', isLoggedIn, catchErrors(addReview));
+
+router.get('/top', catchErrors(getTopStores));
 
 /*
   API

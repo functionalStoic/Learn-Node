@@ -14,7 +14,6 @@ function ajaxHeart(e) {
           2500
         );
       }
-      console.log(isHearted);
     })
     .catch(console.error);
 }

@@ -3030,7 +3030,6 @@ function ajaxHeart(e) {
         return _this.heart.classList.remove('heart__button-float');
       }, 2500);
     }
-    console.log(isHearted);
   }).catch(console.error);
 }
 
