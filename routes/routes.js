@@ -14,7 +14,8 @@ const {
   searchStores,
   mapStores,
   mapPage,
-  heartStore
+  heartStore,
+  getHearts
 } = require('../controllers/storeController');
 const {
   loginForm,
@@ -66,6 +67,8 @@ router.get('/account/reset/:token', catchErrors(reset));
 router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
 
 router.get('/map', mapPage);
+
+router.get('/hearts', catchErrors(getHearts));
 
 /*
   API

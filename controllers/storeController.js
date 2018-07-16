@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
+
+// import Models
 const Store = mongoose.model('Store');
 const User = mongoose.model('User');
+
 const multer = require('multer');
 const jimp = require('jimp');
 const { v4 } = require('uuid');
@@ -150,6 +153,10 @@ exports.heartStore = async (req, res) => {
     { [operator]: { hearts: req.params.id } },
     { new: true }
   );
-
   res.json(user);
+};
+
+exports.getHearts = async (req, res) => {
+  const stores = await Store.find({ _id: { $in: req.user.hearts } });
+  res.render('stores', { title: 'Hearted Stores', stores });
 };
