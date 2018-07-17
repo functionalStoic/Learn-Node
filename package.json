@@ -1,14 +1,17 @@
 {
-  "name": "dang-thats-delicious",
-  "version": "0.0.0",
+  "name": "now-thats-delicious",
+  "version": "0.0.1",
   "private": true,
   "engines": {
     "node": ">= 7.6.0"
   },
+  "now": {
+    "dotenv": "variables.env.now"
+  },
   "scripts": {
-    "prod": "node ./start.js",
+    "start": "node ./start.js",
     "watch": "nodemon ./start.js --ignore public/",
-    "start": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
+    "dev": "concurrently \"npm run watch\" \"npm run assets\" --names \"💻,📦\" --prefix name",
     "assets": "webpack -w --display-max-modules 0",
     "sample": "node ./data/load-sample-data.js",
     "blowitallaway": "node ./data/load-sample-data.js --delete",
@@ -59,7 +62,6 @@
     "eslint-plugin-react": "^7.10.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "flow-bin": "^0.75.0",
-    "kexec": "^3.0.0",
     "node-sass": "^4.9.2",
     "nodemon": "1.17.5",
     "now": "^11.2.5",
