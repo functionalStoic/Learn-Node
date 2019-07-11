@@ -25,7 +25,7 @@
     "connect-mongo": "2.0.1",
     "cookie-parser": "1.4.3",
     "dompurify": "1.0.5",
-    "dotenv": "6.0.0",
+    "dotenv": "6.2.0",
     "es6-promisify": "6.0.0",
     "esm": "^3.0.64",
     "express": "4.16.3",
