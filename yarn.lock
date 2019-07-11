@@ -2354,7 +2354,7 @@ eslint@5.0.1:
     table "^4.0.3"
     text-table "^0.2.0"
 
-esm@^3.0.64:
+esm@3.2.25:
   version "3.2.25"
   resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
 
