@@ -5,9 +5,9 @@ Completed ☑
 
 ## FINISHED DEPLOYMENTS
 
-(Heroku deployment)[https://learn-node-functional-stoic.herokuapp.com/]
+[Heroku deployment](https://learn-node-functional-stoic.herokuapp.com/)
 
-(Now.sh deployment)[https://now-thats-delicious-xucejerhkl.now.sh/]
+[Now.sh deployment](https://now-thats-delicious-xucejerhkl.now.sh/)
 
 ## Logins available
 
