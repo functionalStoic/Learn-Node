@@ -56,7 +56,7 @@
     "babel-core": "6.26.3",
     "babel-loader": "7.1.4",
     "babel-preset-env": "1.7.0",
-    "concurrently": "3.6.0",
+    "concurrently": "3.6.1",
     "css-loader": "0.28.11",
     "eslint": "5.0.1",
     "eslint-plugin-react": "7.10.0",
