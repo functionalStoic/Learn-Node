@@ -62,7 +62,7 @@
     "eslint-plugin-react": "7.10.0",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "flow-bin": "0.75.0",
-    "node-sass": "4.9.2",
+    "node-sass": "4.13.1",
     "nodemon": "1.17.5",
     "now": "11.2.5",
     "postcss-loader": "2.1.5",
