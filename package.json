@@ -33,7 +33,7 @@
     "express-validator": "5.2.0",
     "faker": "4.1.0",
     "forever": "0.15.3",
-    "glob": "7.1.2",
+    "glob": "7.2.3",
     "html-to-text": "4.0.0",
     "jimp": "0.2.28",
     "juice": "4.3.1",
