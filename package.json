@@ -59,7 +59,7 @@
     "concurrently": "3.6.0",
     "css-loader": "0.28.11",
     "eslint": "5.0.1",
-    "eslint-plugin-react": "7.10.0",
+    "eslint-plugin-react": "7.32.2",
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "flow-bin": "0.75.0",
     "node-sass": "4.9.2",
